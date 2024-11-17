@@ -6,9 +6,9 @@ class Node {
   }
 }
 
-class Tree {
+export class Tree {
   constructor(array) {
-    this.root = array;
+    this.root = this.buildTree(this.removeDuplicates(array));
   }
 
   removeDuplicates(array) {
