@@ -27,4 +27,15 @@ export class Tree {
 
     return root;
   }
+
+  insert(value, node = this.root) {
+    if (node === null) return new Node(value);
+    else if (value === node.data) return node;
+    else if (node.data > value) {
+      node.left = this.insert(value, node.left);
+    } else if (node.data < value) {
+      node.right = this.insert(value, node.right);
+    }
+    return node;
+  }
 }
