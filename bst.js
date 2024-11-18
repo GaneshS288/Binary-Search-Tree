@@ -16,6 +16,10 @@ export class Tree {
     return Array.from(setWithoutDuplicate);
   }
 
+  findSuccessor(node) {
+    if(node.left === null) return node;
+  }
+
   buildTree(array, start = 0, end = array.length - 1) {
     if (start > end) return null;
 
@@ -35,6 +39,25 @@ export class Tree {
       node.left = this.insert(value, node.left);
     } else if (node.data < value) {
       node.right = this.insert(value, node.right);
+    }
+    return node;
+  }
+
+  remove(value, node = this.root) {
+    if (node === null) return null;
+    else if (node.data > value) node.left = this.remove(value, node.left);
+    else if (node.data < value) node.right = this.remove(value, node.right);
+    else if (node.data === value) {
+      if(node.left === null) return node.right;
+      if(node.right === null) return node.left;
+      else {
+        let successor = node.right;
+        while(successor.left !== null) {
+          successor = successor.left;
+        }
+        node.data = successor.data;
+        node.right = this.remove(successor.data, node.right)
+      }
     }
     return node;
   }
