@@ -17,7 +17,7 @@ export class Tree {
   }
 
   findSuccessor(node) {
-    if(node.left === null) return node;
+    if (node.left === null) return node;
   }
 
   buildTree(array, start = 0, end = array.length - 1) {
@@ -48,17 +48,41 @@ export class Tree {
     else if (node.data > value) node.left = this.remove(value, node.left);
     else if (node.data < value) node.right = this.remove(value, node.right);
     else if (node.data === value) {
-      if(node.left === null) return node.right;
-      if(node.right === null) return node.left;
+      if (node.left === null) return node.right;
+      if (node.right === null) return node.left;
       else {
         let successor = node.right;
-        while(successor.left !== null) {
+        while (successor.left !== null) {
           successor = successor.left;
         }
         node.data = successor.data;
-        node.right = this.remove(successor.data, node.right)
+        node.right = this.remove(successor.data, node.right);
       }
     }
     return node;
+  }
+
+  preOrder(callback, node = this.root) {
+    if (node === null) return null;
+
+    callback(node.data);
+    this.preOrder(callback, node.left);
+    this.preOrder(callback, node.right);
+  }
+
+  inOrder(callback, node = this.root) {
+    if (node === null) return null;
+
+    this.inOrder(callback, node.left);
+    callback(node.data);
+    this.inOrder(callback, node.right);
+  }
+
+  postOrder(callback, node = this.root) {
+    if (node === null) return null;
+
+    this.postOrder(callback, node.left);
+    this.postOrder(callback, node.right);
+    callback(node.data);
   }
 }
