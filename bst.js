@@ -85,4 +85,11 @@ export class Tree {
     this.postOrder(callback, node.right);
     callback(node.data);
   }
+
+  find(value, node = this.root) {
+    if(node === null) return null;
+    else if(node.data === value) return node;
+    else if(node.data > value) return this.find(value, node.left);
+    else if(node.data < value) return this.find(value, node.right);
+  }
 }
