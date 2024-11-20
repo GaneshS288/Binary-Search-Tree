@@ -92,4 +92,20 @@ export class Tree {
     else if(node.data > value) return this.find(value, node.left);
     else if(node.data < value) return this.find(value, node.right);
   }
+
+  levelOrder(callback) {
+    if(callback === undefined) throw new Error("Callback function is not provided");
+
+    let queue = [];
+    queue.push(this.root);
+
+    for(let i = 0; i < queue.length; i++) {
+      let node = queue[i];
+      if(node === null) return;
+      callback(node);
+
+      if(node.left) queue.push(node.left)
+      if(node.right) queue.push(node.right);
+    }
+  }
 }
