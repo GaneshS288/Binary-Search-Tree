@@ -87,36 +87,53 @@ export class Tree {
   }
 
   find(value, node = this.root) {
-    if(node === null) return null;
-    else if(node.data === value) return node;
-    else if(node.data > value) return this.find(value, node.left);
-    else if(node.data < value) return this.find(value, node.right);
+    if (node === null) return null;
+    else if (node.data === value) return node;
+    else if (node.data > value) return this.find(value, node.left);
+    else if (node.data < value) return this.find(value, node.right);
   }
 
   levelOrder(callback) {
-    if(callback === undefined) throw new Error("Callback function is not provided");
+    if (callback === undefined)
+      throw new Error("Callback function is not provided");
 
     let queue = [];
     queue.push(this.root);
 
-    for(let i = 0; i < queue.length; i++) {
+    for (let i = 0; i < queue.length; i++) {
       let node = queue[i];
-      if(node === null) return;
+      if (node === null) return;
       callback(node);
 
-      if(node.left) queue.push(node.left)
-      if(node.right) queue.push(node.right);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
   }
 
   height(node) {
     //we return -1 on null because otherwise the count will be nodes traversed to get to leaf node instead of edges to leaf node
-    if(node === null) return -1;
+    if (node === null) return -1;
 
     let leftHeight = this.height(node.left);
     let rightHeight = this.height(node.right);
 
-    if(leftHeight > rightHeight) return leftHeight + 1;
+    if (leftHeight > rightHeight) return leftHeight + 1;
     else return rightHeight + 1;
+  }
+
+  depth(targetNode) {
+    let depth = 0;
+    let node = this.root;
+
+    while(true) {
+      if(targetNode === node) break;
+      else if(node === null) throw Error("Node doesn't exit in tree");
+      else if(targetNode.data < node.data) node = node.left;
+      else if(targetNode.data > node.data) node = node.right;
+
+      depth += 1;
+    }
+
+    return depth;
   }
 }
