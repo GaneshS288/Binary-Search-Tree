@@ -17,4 +17,4 @@ let tree = new Tree([1, 5, 9, 13, 17, 18, 20, 24, 25, 26, 28, 29, 30]);
 
 prettyPrint(tree.root);
 
-tree.levelOrder((node) => console.log(node.data));
+console.log(tree.height(tree.find(1)));

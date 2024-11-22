@@ -108,4 +108,15 @@ export class Tree {
       if(node.right) queue.push(node.right);
     }
   }
+
+  height(node) {
+    //we return -1 on null because otherwise the count will be nodes traversed to get to leaf node instead of edges to leaf node
+    if(node === null) return -1;
+
+    let leftHeight = this.height(node.left);
+    let rightHeight = this.height(node.right);
+
+    if(leftHeight > rightHeight) return leftHeight + 1;
+    else return rightHeight + 1;
+  }
 }
