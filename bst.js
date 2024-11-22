@@ -16,10 +16,6 @@ export class Tree {
     return Array.from(setWithoutDuplicate);
   }
 
-  findSuccessor(node) {
-    if (node.left === null) return node;
-  }
-
   buildTree(array, start = 0, end = array.length - 1) {
     if (start > end) return null;
 
@@ -65,7 +61,7 @@ export class Tree {
   preOrder(callback, node = this.root) {
     if (node === null) return null;
 
-    callback(node.data);
+    callback(node);
     this.preOrder(callback, node.left);
     this.preOrder(callback, node.right);
   }
@@ -74,7 +70,7 @@ export class Tree {
     if (node === null) return null;
 
     this.inOrder(callback, node.left);
-    callback(node.data);
+    callback(node);
     this.inOrder(callback, node.right);
   }
 
@@ -83,7 +79,7 @@ export class Tree {
 
     this.postOrder(callback, node.left);
     this.postOrder(callback, node.right);
-    callback(node.data);
+    callback(node);
   }
 
   find(value, node = this.root) {
@@ -146,5 +142,12 @@ export class Tree {
     if(Math.abs(leftHeight - rightHeight) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right)) return true;
 
     else return false;
+  }
+
+  rebalance() {
+    let sortedArray = [];
+    this.inOrder((node) => sortedArray.push(node.data));
+
+    this.root =  this.buildTree(sortedArray);
   }
 }

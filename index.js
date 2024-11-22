@@ -23,3 +23,7 @@ tree.insert(40);
 prettyPrint(tree.root);
 
 console.log(tree.isBalanced());
+tree.rebalance();
+
+prettyPrint(tree.root);
+console.log(tree.isBalanced());
