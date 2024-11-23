@@ -107,7 +107,7 @@ export class Tree {
   }
 
   height(node) {
-    //we return -1 on null because otherwise the count will be nodes traversed to get to leaf node instead of edges to leaf node
+    //we return -1 on null to offset the (leaf node -> null) edge getting included in height
     if (node === null) return -1;
 
     let leftHeight = this.height(node.left);
