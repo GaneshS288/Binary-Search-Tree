@@ -28,13 +28,4 @@ let tree = new Tree(randomNumbersBelow100());
 
 prettyPrint(tree.root);
 
-console.log(tree.isBalanced());
-tree.insert(102);
-tree.insert(125);
-tree.insert(153);
-
-prettyPrint(tree.root);
-console.log(tree.isBalanced());
-tree.rebalance();
-prettyPrint(tree.root);
-console.log(tree.isBalanced());
+tree.levelOrderRecursive((node) => console.log(node.data));

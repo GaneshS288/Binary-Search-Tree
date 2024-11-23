@@ -106,6 +106,19 @@ export class Tree {
     }
   }
 
+  levelOrderRecursive(callback, queue = [this.root], index = 0) {
+    if(callback === undefined) throw Error("Callback function is not provided");
+    if(index >= queue.length) return;
+
+    callback(queue[index]);
+
+    if(queue[index].left) queue.push(queue[index].left);
+    if(queue[index].right) queue.push(queue[index].right);
+
+    index += 1;
+    this.levelOrderRecursive(callback, queue, index);
+  }
+
   height(node) {
     //we return -1 on null to offset the (leaf node -> null) edge getting included in height
     if (node === null) return -1;
