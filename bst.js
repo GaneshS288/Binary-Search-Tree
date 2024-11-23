@@ -121,11 +121,11 @@ export class Tree {
     let depth = 0;
     let node = this.root;
 
-    while(true) {
-      if(targetNode === node) break;
-      else if(node === null) throw Error("Node doesn't exit in tree");
-      else if(targetNode.data < node.data) node = node.left;
-      else if(targetNode.data > node.data) node = node.right;
+    while (true) {
+      if (targetNode === node) break;
+      else if (node === null) throw Error("Node doesn't exit in tree");
+      else if (targetNode.data < node.data) node = node.left;
+      else if (targetNode.data > node.data) node = node.right;
 
       depth += 1;
     }
@@ -134,13 +134,17 @@ export class Tree {
   }
 
   isBalanced(node = this.root) {
-    if(node === null) return true;
+    if (node === null) return true;
 
     let leftHeight = this.height(node.left);
     let rightHeight = this.height(node.right);
 
-    if(Math.abs(leftHeight - rightHeight) <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right)) return true;
-
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(node.left) &&
+      this.isBalanced(node.right)
+    )
+      return true;
     else return false;
   }
 
@@ -148,6 +152,6 @@ export class Tree {
     let sortedArray = [];
     this.inOrder((node) => sortedArray.push(node.data));
 
-    this.root =  this.buildTree(sortedArray);
+    this.root = this.buildTree(sortedArray);
   }
 }

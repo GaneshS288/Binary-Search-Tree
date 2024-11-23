@@ -13,17 +13,28 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-let tree = new Tree([1, 5, 9, 13, 17, 18, 20, 24, 25, 26, 28, 29, 30]);
-tree.insert(3);
-tree.insert(8);
-tree.insert(33);
-tree.insert(40);
+function randomNumbersBelow100() {
+  let numArray = [];
 
+  while (numArray.length <= 11) {
+    let num = Math.floor(Math.random() * 100);
+    numArray.push(num);
+  }
+
+  return numArray.toSorted((a, b) => a - b);
+}
+
+let tree = new Tree(randomNumbersBelow100());
 
 prettyPrint(tree.root);
 
 console.log(tree.isBalanced());
-tree.rebalance();
+tree.insert(102);
+tree.insert(125);
+tree.insert(153);
 
+prettyPrint(tree.root);
+console.log(tree.isBalanced());
+tree.rebalance();
 prettyPrint(tree.root);
 console.log(tree.isBalanced());
